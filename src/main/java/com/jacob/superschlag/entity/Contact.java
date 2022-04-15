@@ -17,10 +17,10 @@ public class Contact {
     private long id;
 
     @ManyToOne
-    private User requesterUserId;
+    private User requesterUser;
 
     @OneToOne
-    private User addresseeUserId;
+    private User addresseeUser;
 
     @Enumerated(EnumType.STRING)
     private ContactStatus contactStatus;
