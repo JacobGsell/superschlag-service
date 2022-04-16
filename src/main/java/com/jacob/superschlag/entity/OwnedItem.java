@@ -5,23 +5,21 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.*;
-import java.util.List;
+import javax.persistence.Entity;
+import javax.persistence.Id;
+import javax.persistence.OneToOne;
 
 @Data
 @Entity
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class Avatar {
+public class OwnedItem {
     @Id
     private long id;
 
-    private String name;
+    @OneToOne
+    private Item item;
 
-    @ManyToOne
-    private Job job;
-
-    @OneToMany
-    private List<OwnedItem> ownedItemList;
+    private boolean isEquipped;
 }
