@@ -11,6 +11,7 @@
     <properties>
         <maven.compiler.source>16</maven.compiler.source>
         <maven.compiler.target>16</maven.compiler.target>
+        <org.mapstruct.version>1.5.0.RC1</org.mapstruct.version>
     </properties>
 
     <dependencies>
