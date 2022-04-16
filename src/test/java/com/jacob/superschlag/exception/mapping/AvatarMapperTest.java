@@ -1,6 +1,7 @@
 package com.jacob.superschlag.exception.mapping;
 
 import com.jacob.superschlag.entity.*;
+import com.jacob.superschlag.exception.transfer.OwnedItemDto;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
@@ -119,5 +120,52 @@ public class AvatarMapperTest {
                 .build();
 
         assertEquals(expectedStats, actualStats);
+    }
+
+    @Test
+    public void getOwnedItemDtoList_should_map_OwnedItems_correctly() {
+        Stats stats1 = Stats.builder()
+                .attack(1)
+                .defense(1)
+                .evasion(1)
+                .luck(1)
+                .health(1)
+                .build();
+
+        Stats stats2 = Stats.builder()
+                .attack(2)
+                .defense(2)
+                .evasion(3)
+                .luck(4)
+                .health(9)
+                .build();
+
+        OwnedItem ownedItem1 = OwnedItem.builder()
+                .item(
+                        Item.builder()
+                                .name("item1")
+                                .stats(stats1)
+                                .build()
+                )
+                .build();
+
+        OwnedItem ownedItem2 = OwnedItem.builder()
+                .item(
+                        Item.builder()
+                                .name("item2")
+                                .stats(stats2)
+                                .build()
+                )
+                .build();
+
+
+        Avatar avatar = Avatar.builder()
+                .ownedItemList(List.of(ownedItem1, ownedItem2))
+                .build();
+
+        List<OwnedItemDto> ownedItemDtoList = AvatarMapper.getOwnedItemDtoList(avatar);
+
+        assertEquals("item1", ownedItemDtoList.get(0).getItemDto().getName());
+        assertEquals("item2", ownedItemDtoList.get(1).getItemDto().getName());
     }
 }

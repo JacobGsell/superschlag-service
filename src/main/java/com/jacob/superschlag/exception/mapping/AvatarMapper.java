@@ -15,7 +15,7 @@ public class AvatarMapper {
                 .name(avatar.getName())
                 .jobDto(JobMapper.toDto(avatar.getJob()))
                 .totalStats(getTotalStats(avatar))
-                .
+                .ownedItemDtoList(getOwnedItemDtoList(avatar))
                 .build();
     }
 
@@ -51,7 +51,10 @@ public class AvatarMapper {
         return allStats;
     }
 
-    static List<OwnedItemDto> getItemDtos() {
-        // Todo
+    static List<OwnedItemDto> getOwnedItemDtoList(Avatar avatar) {
+        return avatar.getOwnedItemList()
+                .stream()
+                .map(ownedItem -> OwnedItemMapper.toDto(ownedItem))
+                .collect(Collectors.toList());
     }
 }
