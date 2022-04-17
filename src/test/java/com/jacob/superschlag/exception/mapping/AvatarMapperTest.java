@@ -3,13 +3,12 @@ package com.jacob.superschlag.exception.mapping;
 import com.jacob.superschlag.entity.*;
 import com.jacob.superschlag.exception.transfer.OwnedItemDto;
 import org.junit.Test;
-import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
 
 import java.util.List;
 
-import static org.junit.jupiter.api.Assertions.*;
+import static org.junit.jupiter.api.Assertions.assertEquals;
 
 @RunWith(MockitoJUnitRunner.class)
 public class AvatarMapperTest {
