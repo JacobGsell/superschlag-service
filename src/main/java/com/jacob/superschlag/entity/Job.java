@@ -14,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Job {
     @Id
+    @GeneratedValue
     private long id;
 
     private String name;

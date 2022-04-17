@@ -15,6 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Battle {
     @Id
+    @GeneratedValue
     private long id;
 
     private int round;

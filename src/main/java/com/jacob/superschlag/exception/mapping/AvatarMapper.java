@@ -5,13 +5,14 @@ import com.jacob.superschlag.entity.OwnedItem;
 import com.jacob.superschlag.entity.Stats;
 import com.jacob.superschlag.exception.transfer.AvatarDto;
 import com.jacob.superschlag.exception.transfer.OwnedItemDto;
+import com.jacob.superschlag.exception.transfer.StatsDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
 
 public class AvatarMapper {
 
-    public static Avatar toAvatar(AvatarDto avatarDto) {
+    public static Avatar toAvatar(AvatarDto avatarDto) throws Exception {
         return Avatar.builder()
                 .name(avatarDto.getName())
                 .job(JobMapper.toJob(avatarDto.getJobDto()))
@@ -28,13 +29,14 @@ public class AvatarMapper {
                 .build();
     }
 
-    static Stats getTotalStats(Avatar avatar) {
-        Stats totalStats;
+    static StatsDto getTotalStats(Avatar avatar) {
+        StatsDto totalStats;
 
         List<Stats> allStats = getAllStats(avatar);
 
         totalStats = allStats.stream()
-                .reduce(new Stats(), (base, element) -> {
+                .map(StatsMapper::toDto)
+                .reduce(new StatsDto(), (base, element) -> {
                     base.setAttack(base.getAttack() + element.getAttack());
                     base.setDefense(base.getDefense() + element.getDefense());
                     base.setEvasion(base.getEvasion() + element.getEvasion());
@@ -67,7 +69,11 @@ public class AvatarMapper {
                 .collect(Collectors.toList());
     }
 
-    static List<OwnedItem> getOwnedItemList(AvatarDto avatarDto) {
+    static List<OwnedItem> getOwnedItemList(AvatarDto avatarDto) throws Exception {
+        if(avatarDto.getOwnedItemDtoList().isEmpty()) {
+            throw new Exception();
+        }
+
         return avatarDto.getOwnedItemDtoList()
                 .stream()
                 .map(OwnedItemMapper::toOwnedItem)

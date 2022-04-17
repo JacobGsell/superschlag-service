@@ -31,7 +31,8 @@ public class AvatarController {
     }
 
     @PostMapping
-    public void postAvatar(@RequestBody AvatarDto avatarDto, HttpServletResponse response) {
+    public void postAvatar(@RequestBody AvatarDto avatarDto, HttpServletResponse response) throws Exception {
+        System.out.println(avatarDto);
         avatarService.handleNewAvatar(avatarDto);
 
         response.setStatus(HttpServletResponse.SC_CREATED);

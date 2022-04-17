@@ -1,6 +1,7 @@
 package com.jacob.superschlag.service;
 
 import com.jacob.superschlag.entity.Avatar;
+import com.jacob.superschlag.exception.mapping.AvatarMapper;
 import com.jacob.superschlag.exception.transfer.AvatarDto;
 import com.jacob.superschlag.repository.AvatarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,9 +29,9 @@ public class AvatarService {
         return avatarOptional.get();
     }
 
-    public void handleNewAvatar(AvatarDto avatarDto) {
-        Avatar avatar = new Avatar();
-// todo: mappen!
+    public void handleNewAvatar(AvatarDto avatarDto) throws Exception {
+        Avatar avatar = AvatarMapper.toAvatar(avatarDto);
+
         avatarRepository.save(avatar);
     }
 }

@@ -1,14 +1,12 @@
 package com.jacob.superschlag.exception.transfer;
 
-import lombok.AllArgsConstructor;
-import lombok.Builder;
-import lombok.Data;
-import lombok.Getter;
+import lombok.*;
 
 @Data
 @Getter
 @Builder
 @AllArgsConstructor
+@NoArgsConstructor
 public class OwnedItemDto {
     private ItemDto itemDto;
 

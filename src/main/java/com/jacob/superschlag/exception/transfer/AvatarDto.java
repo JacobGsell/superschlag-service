@@ -1,6 +1,5 @@
 package com.jacob.superschlag.exception.transfer;
 
-import com.jacob.superschlag.entity.Stats;
 import lombok.AllArgsConstructor;
 import lombok.Builder;
 import lombok.Data;
@@ -15,6 +14,6 @@ import java.util.List;
 public class AvatarDto {
     private String name;
     private JobDto jobDto;
-    private Stats totalStats;
+    private StatsDto totalStats;
     private List<OwnedItemDto> ownedItemDtoList;
 }

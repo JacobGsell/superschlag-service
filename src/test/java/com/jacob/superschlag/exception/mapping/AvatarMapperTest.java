@@ -112,8 +112,8 @@ public class AvatarMapperTest {
                 .job(job)
                 .build();
 
-        Stats actualStats = AvatarMapper.getTotalStats(avatar);
-        Stats expectedStats = Stats.builder()
+        StatsDto actualStats = AvatarMapper.getTotalStats(avatar);
+        StatsDto expectedStats = StatsDto.builder()
                 .attack(3)
                 .defense(3)
                 .evasion(4)
@@ -172,7 +172,7 @@ public class AvatarMapperTest {
     }
 
     @Test
-    public void getOwnedItemList_should_map_OwnedItemDtos_correctly() {
+    public void getOwnedItemList_should_map_OwnedItemDtos_correctly() throws Exception {
         StatsDto statsDto1 = StatsDto.builder()
                 .attack(1)
                 .defense(1)

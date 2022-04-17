@@ -14,6 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Contact {
     @Id
+    @GeneratedValue
     private long id;
 
     @ManyToOne
