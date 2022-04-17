@@ -12,10 +12,10 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class OwnedItem {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
-    @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Item item;
 
     private boolean isEquipped;

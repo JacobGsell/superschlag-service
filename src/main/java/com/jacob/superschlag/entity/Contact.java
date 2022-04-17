@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Contact {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     @ManyToOne

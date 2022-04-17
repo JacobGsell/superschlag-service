@@ -14,7 +14,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class Item {
     @Id
-    @GeneratedValue
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
     private long id;
 
     private String name;
@@ -22,6 +22,6 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemType itemType;
 
-    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @OneToOne(cascade = CascadeType.ALL, fetch = FetchType.LAZY)
     private Stats stats;
 }
