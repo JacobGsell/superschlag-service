@@ -13,4 +13,14 @@ public class StatsMapper {
                 .health(stats.getHealth())
                 .build();
     }
+
+    public static Stats toStats(StatsDto statsDto) {
+        return Stats.builder()
+                .attack(statsDto.getAttack())
+                .defense(statsDto.getDefense())
+                .evasion(statsDto.getEvasion())
+                .luck(statsDto.getLuck())
+                .health(statsDto.getHealth())
+                .build();
+    }
 }

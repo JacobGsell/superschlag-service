@@ -10,4 +10,11 @@ public class OwnedItemMapper {
                 .isEquipped(ownedItem.isEquipped())
                 .build();
     }
+
+    public static OwnedItem toOwnedItem(OwnedItemDto ownedItemDto) {
+        return OwnedItem.builder()
+                .item(ItemMapper.toItem(ownedItemDto.getItemDto()))
+                .isEquipped(ownedItemDto.isEquipped())
+                .build();
+    }
 }

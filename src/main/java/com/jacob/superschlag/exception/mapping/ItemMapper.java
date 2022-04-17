@@ -11,4 +11,12 @@ public class ItemMapper {
                 .statsDto(StatsMapper.toDto(item.getStats()))
                 .build();
     }
+
+    public static Item toItem(ItemDto itemDto) {
+        return Item.builder()
+                .name(itemDto.getName())
+                .itemType(itemDto.getItemType())
+                .stats(StatsMapper.toStats(itemDto.getStatsDto()))
+                .build();
+    }
 }

@@ -1,6 +1,7 @@
 package com.jacob.superschlag.exception.mapping;
 
 import com.jacob.superschlag.entity.Job;
+import com.jacob.superschlag.exception.transfer.AvatarDto;
 import com.jacob.superschlag.exception.transfer.JobDto;
 
 public class JobMapper {
@@ -13,4 +14,10 @@ public class JobMapper {
                 .build();
     }
 
+    public static Job toJob(JobDto jobDto) {
+        return Job.builder()
+                .name(jobDto.getName())
+                .stats(StatsMapper.toStats(jobDto.getStatsDto()))
+                .build();
+    }
 }

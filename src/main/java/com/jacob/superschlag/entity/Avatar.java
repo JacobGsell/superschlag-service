@@ -15,13 +15,14 @@ import java.util.List;
 @NoArgsConstructor
 public class Avatar {
     @Id
+    @GeneratedValue
     private long id;
 
     private String name;
 
-    @ManyToOne
+    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private Job job;
 
-    @OneToMany
+    @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OwnedItem> ownedItemList;
 }

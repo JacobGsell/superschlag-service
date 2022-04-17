@@ -10,6 +10,15 @@ import java.util.List;
 import java.util.stream.Collectors;
 
 public class AvatarMapper {
+
+    public static Avatar toAvatar(AvatarDto avatarDto) {
+        return Avatar.builder()
+                .name(avatarDto.getName())
+                .job(JobMapper.toJob(avatarDto.getJobDto()))
+                .ownedItemList(getOwnedItemList(avatarDto))
+                .build();
+    }
+
     public static AvatarDto toDto(Avatar avatar) {
         return AvatarDto.builder()
                 .name(avatar.getName())
@@ -54,7 +63,14 @@ public class AvatarMapper {
     static List<OwnedItemDto> getOwnedItemDtoList(Avatar avatar) {
         return avatar.getOwnedItemList()
                 .stream()
-                .map(ownedItem -> OwnedItemMapper.toDto(ownedItem))
+                .map(OwnedItemMapper::toDto)
+                .collect(Collectors.toList());
+    }
+
+    static List<OwnedItem> getOwnedItemList(AvatarDto avatarDto) {
+        return avatarDto.getOwnedItemDtoList()
+                .stream()
+                .map(OwnedItemMapper::toOwnedItem)
                 .collect(Collectors.toList());
     }
 }

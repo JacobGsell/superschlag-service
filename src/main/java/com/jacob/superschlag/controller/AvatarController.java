@@ -6,10 +6,9 @@ import com.jacob.superschlag.exception.transfer.AvatarDto;
 import com.jacob.superschlag.service.AvatarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
-import org.springframework.web.bind.annotation.GetMapping;
-import org.springframework.web.bind.annotation.PathVariable;
-import org.springframework.web.bind.annotation.RequestMapping;
-import org.springframework.web.bind.annotation.ResponseBody;
+import org.springframework.web.bind.annotation.*;
+
+import javax.servlet.http.HttpServletResponse;
 
 @Controller
 @RequestMapping(value = "/avatar")
@@ -29,5 +28,12 @@ public class AvatarController {
         AvatarDto avatarDto = AvatarMapper.toDto(avatar);
 
         return avatarDto;
+    }
+
+    @PostMapping
+    public void postAvatar(@RequestBody AvatarDto avatarDto, HttpServletResponse response) {
+        avatarService.handleNewAvatar(avatarDto);
+
+        response.setStatus(HttpServletResponse.SC_CREATED);
     }
 }

@@ -1,7 +1,10 @@
 package com.jacob.superschlag.exception.mapping;
 
 import com.jacob.superschlag.entity.*;
+import com.jacob.superschlag.exception.transfer.AvatarDto;
+import com.jacob.superschlag.exception.transfer.ItemDto;
 import com.jacob.superschlag.exception.transfer.OwnedItemDto;
+import com.jacob.superschlag.exception.transfer.StatsDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;
@@ -166,5 +169,52 @@ public class AvatarMapperTest {
 
         assertEquals("item1", ownedItemDtoList.get(0).getItemDto().getName());
         assertEquals("item2", ownedItemDtoList.get(1).getItemDto().getName());
+    }
+
+    @Test
+    public void getOwnedItemList_should_map_OwnedItemDtos_correctly() {
+        StatsDto statsDto1 = StatsDto.builder()
+                .attack(1)
+                .defense(1)
+                .evasion(1)
+                .luck(1)
+                .health(1)
+                .build();
+
+        StatsDto statsDto2 = StatsDto.builder()
+                .attack(2)
+                .defense(2)
+                .evasion(3)
+                .luck(4)
+                .health(9)
+                .build();
+
+        OwnedItemDto ownedItemDto1 = OwnedItemDto.builder()
+                .itemDto(
+                        ItemDto.builder()
+                                .name("item1")
+                                .statsDto(statsDto1)
+                                .build()
+                )
+                .build();
+
+        OwnedItemDto ownedItemDto2 = OwnedItemDto.builder()
+                .itemDto(
+                        ItemDto.builder()
+                                .name("item2")
+                                .statsDto(statsDto2)
+                                .build()
+                )
+                .build();
+
+
+        AvatarDto avatarDto = AvatarDto.builder()
+                .ownedItemDtoList(List.of(ownedItemDto1, ownedItemDto2))
+                .build();
+
+        List<OwnedItem> ownedItemList = AvatarMapper.getOwnedItemList(avatarDto);
+
+        assertEquals("item1", ownedItemList.get(0).getItem().getName());
+        assertEquals("item2", ownedItemList.get(1).getItem().getName());
     }
 }

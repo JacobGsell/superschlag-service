@@ -21,6 +21,6 @@ public class Item {
     @Enumerated(EnumType.STRING)
     private ItemType itemType;
 
-    @OneToOne
+    @OneToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private Stats stats;
 }

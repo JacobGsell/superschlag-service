@@ -5,9 +5,7 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import javax.persistence.Entity;
-import javax.persistence.Id;
-import javax.persistence.OneToOne;
+import javax.persistence.*;
 
 @Data
 @Entity
@@ -20,6 +18,6 @@ public class Job {
 
     private String name;
 
-    @OneToOne
+    @OneToOne(cascade= CascadeType.ALL, fetch = FetchType.LAZY)
     private Stats stats;
 }
