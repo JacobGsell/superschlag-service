@@ -12,13 +12,12 @@ import javax.persistence.EntityNotFoundException;
 public class ExceptionHandlingController {
 
     @ExceptionHandler(EntityNotFoundException.class)
-    public ResponseEntity notFound() {
-        return new ResponseEntity("Entity not found!", HttpStatus.NOT_FOUND);
+    public ResponseEntity<Object> notFound() {
+        return new ResponseEntity<>("Entity not found!", HttpStatus.NOT_FOUND);
     }
 
-
     @ExceptionHandler(InvalidOwnedItemListException.class)
-    protected ResponseEntity invalid() {
-        return new ResponseEntity("Invalid owned item list!", HttpStatus.NOT_ACCEPTABLE);
+    protected ResponseEntity<Object> invalid() {
+        return new ResponseEntity<>("Invalid owned item list!", HttpStatus.NOT_ACCEPTABLE);
     }
 }
