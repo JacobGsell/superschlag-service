@@ -20,7 +20,7 @@ public class Avatar {
 
     private String name;
 
-    @ManyToOne(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
+    @ManyToOne(cascade=CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Job job;
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)

@@ -2,8 +2,8 @@ package com.jacob.superschlag.controller;
 
 import com.jacob.superschlag.entity.Avatar;
 import com.jacob.superschlag.mapping.AvatarMapper;
-import com.jacob.superschlag.transfer.AvatarDto;
 import com.jacob.superschlag.service.AvatarService;
+import com.jacob.superschlag.transfer.AvatarDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.*;
@@ -35,5 +35,12 @@ public class AvatarController {
         avatarService.handleNewAvatar(avatarDto);
 
         response.setStatus(HttpServletResponse.SC_CREATED);
+    }
+
+    @DeleteMapping(value = "/{avatarId}")
+    public void deleteAvatarById(@PathVariable long avatarId, HttpServletResponse response) {
+        avatarService.deleteAvatarById(avatarId);
+
+        response.setStatus(HttpServletResponse.SC_OK);
     }
 }

@@ -56,6 +56,10 @@ public class AvatarService {
         avatarRepository.save(avatar);
     }
 
+    public void deleteAvatarById(long id) {
+        avatarRepository.deleteById(id);
+    }
+
     boolean hasDistinctItemTypes(List<OwnedItemDto> equippedItemList) {
         Set<ItemType> distinctItemTypesSet = new HashSet<>();
 
