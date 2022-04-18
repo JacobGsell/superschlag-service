@@ -1,7 +1,7 @@
-package com.jacob.superschlag.exception.mapping;
+package com.jacob.superschlag.mapping;
 
 import com.jacob.superschlag.entity.Item;
-import com.jacob.superschlag.exception.transfer.ItemDto;
+import com.jacob.superschlag.transfer.ItemDto;
 
 public class ItemMapper {
     public static ItemDto toDto(Item item) {

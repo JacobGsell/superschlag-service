@@ -1,4 +1,4 @@
-package com.jacob.superschlag.exception.access;
+package com.jacob.superschlag.access;
 
 import lombok.Data;
 

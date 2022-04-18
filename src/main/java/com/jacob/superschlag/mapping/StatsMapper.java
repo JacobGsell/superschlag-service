@@ -1,7 +1,7 @@
-package com.jacob.superschlag.exception.mapping;
+package com.jacob.superschlag.mapping;
 
 import com.jacob.superschlag.entity.Stats;
-import com.jacob.superschlag.exception.transfer.StatsDto;
+import com.jacob.superschlag.transfer.StatsDto;
 
 public class StatsMapper {
     public static StatsDto toDto(Stats stats) {

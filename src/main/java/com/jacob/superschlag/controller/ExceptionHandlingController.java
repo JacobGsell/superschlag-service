@@ -1,5 +1,6 @@
 package com.jacob.superschlag.controller;
 
+import com.jacob.superschlag.exception.InvalidOwnedItemListException;
 import org.springframework.http.HttpStatus;
 import org.springframework.stereotype.Controller;
 import org.springframework.web.bind.annotation.ControllerAdvice;
@@ -17,7 +18,11 @@ public class ExceptionHandlingController {
             reason="Entity not found")  // 404
     @ExceptionHandler(EntityNotFoundException.class)
     public void notFound() {
-        // Nothing to do
     }
 
+    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE,
+    reason = "Not acceptable")
+    @ExceptionHandler(InvalidOwnedItemListException.class)
+    public void invalid() {
+    }
 }

@@ -1,8 +1,8 @@
 package com.jacob.superschlag.controller;
 
 import com.jacob.superschlag.entity.Avatar;
-import com.jacob.superschlag.exception.mapping.AvatarMapper;
-import com.jacob.superschlag.exception.transfer.AvatarDto;
+import com.jacob.superschlag.mapping.AvatarMapper;
+import com.jacob.superschlag.transfer.AvatarDto;
 import com.jacob.superschlag.service.AvatarService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -32,7 +32,6 @@ public class AvatarController {
 
     @PostMapping
     public void postAvatar(@RequestBody AvatarDto avatarDto, HttpServletResponse response) throws Exception {
-        System.out.println(avatarDto);
         avatarService.handleNewAvatar(avatarDto);
 
         response.setStatus(HttpServletResponse.SC_CREATED);

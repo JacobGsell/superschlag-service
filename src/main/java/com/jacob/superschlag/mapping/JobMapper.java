@@ -1,8 +1,7 @@
-package com.jacob.superschlag.exception.mapping;
+package com.jacob.superschlag.mapping;
 
 import com.jacob.superschlag.entity.Job;
-import com.jacob.superschlag.exception.transfer.AvatarDto;
-import com.jacob.superschlag.exception.transfer.JobDto;
+import com.jacob.superschlag.transfer.JobDto;
 
 public class JobMapper {
 

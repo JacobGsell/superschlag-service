@@ -1,10 +1,10 @@
-package com.jacob.superschlag.exception.mapping;
+package com.jacob.superschlag.mapping;
 
 import com.jacob.superschlag.entity.*;
-import com.jacob.superschlag.exception.transfer.AvatarDto;
-import com.jacob.superschlag.exception.transfer.ItemDto;
-import com.jacob.superschlag.exception.transfer.OwnedItemDto;
-import com.jacob.superschlag.exception.transfer.StatsDto;
+import com.jacob.superschlag.transfer.AvatarDto;
+import com.jacob.superschlag.transfer.ItemDto;
+import com.jacob.superschlag.transfer.OwnedItemDto;
+import com.jacob.superschlag.transfer.StatsDto;
 import org.junit.Test;
 import org.junit.runner.RunWith;
 import org.mockito.junit.MockitoJUnitRunner;

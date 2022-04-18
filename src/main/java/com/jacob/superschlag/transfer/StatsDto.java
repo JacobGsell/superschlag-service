@@ -1,4 +1,4 @@
-package com.jacob.superschlag.exception.transfer;
+package com.jacob.superschlag.transfer;
 
 import lombok.*;
 

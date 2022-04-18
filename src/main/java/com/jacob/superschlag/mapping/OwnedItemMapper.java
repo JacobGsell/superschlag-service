@@ -1,7 +1,7 @@
-package com.jacob.superschlag.exception.mapping;
+package com.jacob.superschlag.mapping;
 
 import com.jacob.superschlag.entity.OwnedItem;
-import com.jacob.superschlag.exception.transfer.OwnedItemDto;
+import com.jacob.superschlag.transfer.OwnedItemDto;
 
 public class OwnedItemMapper {
     public static OwnedItemDto toDto(OwnedItem ownedItem) {

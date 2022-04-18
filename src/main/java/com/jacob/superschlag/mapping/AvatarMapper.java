@@ -1,11 +1,11 @@
-package com.jacob.superschlag.exception.mapping;
+package com.jacob.superschlag.mapping;
 
 import com.jacob.superschlag.entity.Avatar;
 import com.jacob.superschlag.entity.OwnedItem;
 import com.jacob.superschlag.entity.Stats;
-import com.jacob.superschlag.exception.transfer.AvatarDto;
-import com.jacob.superschlag.exception.transfer.OwnedItemDto;
-import com.jacob.superschlag.exception.transfer.StatsDto;
+import com.jacob.superschlag.transfer.AvatarDto;
+import com.jacob.superschlag.transfer.OwnedItemDto;
+import com.jacob.superschlag.transfer.StatsDto;
 
 import java.util.List;
 import java.util.stream.Collectors;
