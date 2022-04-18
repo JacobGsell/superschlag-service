@@ -2,27 +2,23 @@ package com.jacob.superschlag.controller;
 
 import com.jacob.superschlag.exception.InvalidOwnedItemListException;
 import org.springframework.http.HttpStatus;
-import org.springframework.stereotype.Controller;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.ControllerAdvice;
 import org.springframework.web.bind.annotation.ExceptionHandler;
-import org.springframework.web.bind.annotation.ResponseStatus;
 
 import javax.persistence.EntityNotFoundException;
 
 @ControllerAdvice
 public class ExceptionHandlingController {
-    // Exception handling methods
 
-    // Convert a predefined exception to an HTTP Status code
-    @ResponseStatus(value= HttpStatus.NOT_FOUND,
-            reason="Entity not found")  // 404
     @ExceptionHandler(EntityNotFoundException.class)
-    public void notFound() {
+    public ResponseEntity notFound() {
+        return new ResponseEntity("Entity not found!", HttpStatus.NOT_FOUND);
     }
 
-    @ResponseStatus(value = HttpStatus.NOT_ACCEPTABLE,
-    reason = "Not acceptable")
+
     @ExceptionHandler(InvalidOwnedItemListException.class)
-    public void invalid() {
+    protected ResponseEntity invalid() {
+        return new ResponseEntity("Invalid owned item list!", HttpStatus.NOT_ACCEPTABLE);
     }
 }
