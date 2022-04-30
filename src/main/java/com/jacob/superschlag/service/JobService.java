@@ -18,7 +18,7 @@ public class JobService {
     @Autowired
     public JobService(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
-        testInit();
+        createInitialJobsForTesting();
     }
 
     public Job findJobById(long id) {
@@ -41,7 +41,7 @@ public class JobService {
         return jobList;
     }
 
-    private void testInit() {
+    private void createInitialJobsForTesting() {
         Job job1 = createJob("Ritter",
                 20,
                 50,
@@ -63,10 +63,8 @@ public class JobService {
                 150,
                 100);
 
-        job1.setId(UUID.randomUUID().toString());
-
         jobRepository.deleteAll();
-        jobRepository.saveAll(List.of(job1/*, job2, job3*/));
+        jobRepository.saveAll(List.of(job1, job2, job3));
     }
 
     private Job createJob(String name, int attack, int defense, int evasion, int luck, int health) {
@@ -75,6 +73,7 @@ public class JobService {
                 .name(name)
                 .stats(
                         Stats.builder()
+                                .id(UUID.randomUUID().toString())
                                 .attack(attack)
                                 .defense(defense)
                                 .evasion(evasion)
