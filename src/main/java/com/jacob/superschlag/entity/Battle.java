@@ -15,8 +15,7 @@ import java.time.LocalDateTime;
 @NoArgsConstructor
 public class Battle {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     private int round;
     private int aggressorCurrentHealth;

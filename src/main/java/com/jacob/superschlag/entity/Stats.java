@@ -17,8 +17,7 @@ import javax.persistence.Id;
 @NoArgsConstructor
 public class Stats {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     private int attack;
     private int defense;

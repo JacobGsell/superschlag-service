@@ -12,8 +12,7 @@ import javax.persistence.*;
 @NoArgsConstructor
 public class OwnedItem {
     @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private long id;
+    private String id;
 
     @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
     private Item item;

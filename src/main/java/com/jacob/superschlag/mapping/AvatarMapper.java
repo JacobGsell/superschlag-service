@@ -8,12 +8,14 @@ import com.jacob.superschlag.transfer.OwnedItemDto;
 import com.jacob.superschlag.transfer.StatsDto;
 
 import java.util.List;
+import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class AvatarMapper {
 
     public static Avatar toAvatar(AvatarDto avatarDto) throws Exception {
         return Avatar.builder()
+                .id(UUID.randomUUID().toString())
                 .name(avatarDto.getName())
                 .job(JobMapper.toJob(avatarDto.getJobDto()))
                 .ownedItemList(getOwnedItemList(avatarDto))
@@ -70,7 +72,7 @@ public class AvatarMapper {
     }
 
     static List<OwnedItem> getOwnedItemList(AvatarDto avatarDto) throws Exception {
-        if(avatarDto.getOwnedItemDtoList().isEmpty()) {
+        if (avatarDto.getOwnedItemDtoList().isEmpty()) {
             throw new Exception();
         }
 
