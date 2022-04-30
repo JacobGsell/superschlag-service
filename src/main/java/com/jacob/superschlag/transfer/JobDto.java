@@ -9,6 +9,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class JobDto {
+    private String id;
+
     @NotNull
     private String name;
 

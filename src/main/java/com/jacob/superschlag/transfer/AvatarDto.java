@@ -13,13 +13,13 @@ import java.util.List;
 @AllArgsConstructor
 @NoArgsConstructor
 public class AvatarDto {
+    private String id;
+
     @NotNull
     private String name;
 
     @NotNull
     private JobDto jobDto;
-
-    private StatsDto totalStats;
 
     private List<OwnedItemDto> ownedItemDtoList;
 }

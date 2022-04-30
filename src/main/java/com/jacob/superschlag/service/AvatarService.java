@@ -26,7 +26,7 @@ public class AvatarService {
         this.avatarRepository = avatarRepository;
     }
 
-    public Avatar findAvatarById(long id) {
+    public Avatar findAvatarById(String id) {
         Optional<Avatar> avatarOptional = avatarRepository.findById(id);
 
         if (avatarOptional.isEmpty()) {
@@ -55,7 +55,7 @@ public class AvatarService {
         avatarRepository.save(avatar);
     }
 
-    public void deleteAvatarById(long id) {
+    public void deleteAvatarById(String id) {
         avatarRepository.deleteById(id);
     }
 

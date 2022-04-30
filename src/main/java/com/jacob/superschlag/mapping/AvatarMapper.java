@@ -1,11 +1,14 @@
 package com.jacob.superschlag.mapping;
 
 import com.jacob.superschlag.entity.Avatar;
+import com.jacob.superschlag.entity.Job;
 import com.jacob.superschlag.entity.OwnedItem;
 import com.jacob.superschlag.entity.Stats;
+import com.jacob.superschlag.service.JobService;
 import com.jacob.superschlag.transfer.AvatarDto;
 import com.jacob.superschlag.transfer.OwnedItemDto;
 import com.jacob.superschlag.transfer.StatsDto;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.util.List;
 import java.util.UUID;
@@ -13,56 +16,33 @@ import java.util.stream.Collectors;
 
 public class AvatarMapper {
 
+    private static JobService jobService;
+
+    @Autowired
+    public AvatarMapper(JobService jobService) {
+        AvatarMapper.jobService = jobService;
+    }
+
     public static Avatar toAvatar(AvatarDto avatarDto) throws Exception {
         return Avatar.builder()
-                .id(UUID.randomUUID().toString())
+                .id(avatarDto.getId())
                 .name(avatarDto.getName())
-                .job(JobMapper.toJob(avatarDto.getJobDto()))
+                .jobId(avatarDto.getJobDto().getId())
                 .ownedItemList(getOwnedItemList(avatarDto))
                 .build();
     }
 
     public static AvatarDto toDto(Avatar avatar) {
+        Job job = jobService.findJobById(avatar.getJobId());
+
         return AvatarDto.builder()
+                .id(avatar.getId())
+                .jobDto(JobMapper.toDto(job))
                 .name(avatar.getName())
-                .jobDto(JobMapper.toDto(avatar.getJob()))
-                .totalStats(getTotalStats(avatar))
                 .ownedItemDtoList(getOwnedItemDtoList(avatar))
                 .build();
     }
 
-    static StatsDto getTotalStats(Avatar avatar) {
-        StatsDto totalStats;
-
-        List<Stats> allStats = getAllStats(avatar);
-
-        totalStats = allStats.stream()
-                .map(StatsMapper::toDto)
-                .reduce(new StatsDto(), (base, element) -> {
-                    base.setAttack(base.getAttack() + element.getAttack());
-                    base.setDefense(base.getDefense() + element.getDefense());
-                    base.setEvasion(base.getEvasion() + element.getEvasion());
-                    base.setLuck(base.getLuck() + element.getLuck());
-                    base.setHealth(base.getHealth() + element.getHealth());
-                    return base;
-                });
-
-        return totalStats;
-    }
-
-    static List<Stats> getAllStats(Avatar avatar) {
-        List<Stats> allStats;
-
-        allStats = avatar.getOwnedItemList()
-                .stream()
-                .filter(OwnedItem::isEquipped)
-                .map(ownedItem -> ownedItem.getItem().getStats())
-                .collect(Collectors.toList());
-
-        allStats.add(avatar.getJob().getStats());
-
-        return allStats;
-    }
 
     static List<OwnedItemDto> getOwnedItemDtoList(Avatar avatar) {
         return avatar.getOwnedItemList()

@@ -8,6 +8,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class OwnedItemDto {
+    private String id;
+
     private ItemDto itemDto;
 
     private boolean isEquipped;

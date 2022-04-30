@@ -1,8 +1,11 @@
 package com.jacob.superschlag.controller;
 
 import com.jacob.superschlag.entity.Avatar;
+import com.jacob.superschlag.entity.Job;
 import com.jacob.superschlag.mapping.AvatarMapper;
+import com.jacob.superschlag.mapping.JobMapper;
 import com.jacob.superschlag.service.AvatarService;
+import com.jacob.superschlag.service.JobService;
 import com.jacob.superschlag.transfer.AvatarDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Controller;
@@ -15,15 +18,17 @@ import javax.servlet.http.HttpServletResponse;
 public class AvatarController {
 
     private final AvatarService avatarService;
+    private final JobService jobService;
 
     @Autowired
-    public AvatarController(AvatarService avatarService) {
+    public AvatarController(AvatarService avatarService, JobService jobService) {
         this.avatarService = avatarService;
+        this.jobService = jobService;
     }
 
     @GetMapping(value = "/{avatarId}")
     public @ResponseBody
-    AvatarDto getAvatarById(@PathVariable long avatarId) {
+    AvatarDto getAvatarById(@PathVariable String avatarId) {
         Avatar avatar = avatarService.findAvatarById(avatarId);
         AvatarDto avatarDto = AvatarMapper.toDto(avatar);
 
@@ -38,7 +43,7 @@ public class AvatarController {
     }
 
     @DeleteMapping(value = "/{avatarId}")
-    public void deleteAvatarById(@PathVariable long avatarId, HttpServletResponse response) {
+    public void deleteAvatarById(@PathVariable String avatarId, HttpServletResponse response) {
         avatarService.deleteAvatarById(avatarId);
 
         response.setStatus(HttpServletResponse.SC_OK);

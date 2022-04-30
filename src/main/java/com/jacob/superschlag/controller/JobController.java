@@ -35,7 +35,7 @@ public class JobController {
 
     @GetMapping(value = "/{jobId}")
     public @ResponseBody
-    JobDto getJobById(@PathVariable long jobId) {
+    JobDto getJobById(@PathVariable String jobId) {
         Job job = this.jobService.findJobById(jobId);
         JobDto jobDto = JobMapper.toDto(job);
 

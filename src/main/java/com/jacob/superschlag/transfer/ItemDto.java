@@ -10,6 +10,8 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class ItemDto {
+    private String id;
+
     @NotNull
     private String name;
 

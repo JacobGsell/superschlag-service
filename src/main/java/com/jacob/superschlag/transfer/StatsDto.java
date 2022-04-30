@@ -8,6 +8,7 @@ import lombok.*;
 @AllArgsConstructor
 @NoArgsConstructor
 public class StatsDto {
+    private String id;
     private int attack;
     private int defense;
     private int evasion;

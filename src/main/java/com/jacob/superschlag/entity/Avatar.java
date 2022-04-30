@@ -19,8 +19,7 @@ public class Avatar {
 
     private String name;
 
-    @ManyToOne(cascade=CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private Job job;
+    private String jobId;
 
     @OneToMany(cascade=CascadeType.ALL, fetch = FetchType.LAZY)
     private List<OwnedItem> ownedItemList;

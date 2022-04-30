@@ -19,6 +19,7 @@ import org.springframework.boot.test.context.SpringBootTest;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
+import java.util.UUID;
 
 import static org.junit.jupiter.api.Assertions.assertEquals;
 import static org.junit.jupiter.api.Assertions.assertThrows;
@@ -42,7 +43,7 @@ public class AvatarServiceTest {
     @Test
     public void findAvatarById_should_get_AvatarOptional_on_existing_id() {
         // Arrange
-        long avatarId = 0;
+        String avatarId = UUID.randomUUID().toString();
         Avatar expected = new Avatar();
         Optional<Avatar> expectedOptional = Optional.of(expected);
 
@@ -58,7 +59,7 @@ public class AvatarServiceTest {
     @Test
     public void findAvatarById_should_throw_EntityNotFoundException_on_empty_AvatarOptional() {
         // Arrange
-        long avatarId = 0;
+        String avatarId = UUID.randomUUID().toString();
         Optional<Avatar> actual = Optional.empty();
 
         when(avatarRepositoryMock.findById(avatarId)).thenReturn(actual);
@@ -68,7 +69,7 @@ public class AvatarServiceTest {
     }
 
     @Test
-    public void handleNewAvatar_should_throw_InvalidOwnedItemListException_on_indistinct_weaponTypes() throws Exception {
+    public void handleNewAvatar_should_throw_InvalidOwnedItemListException_on_indistinct_weaponTypes() {
         // Arrange
         ItemDto itemDto1 = ItemDto.builder()
                 .itemType(ItemType.WEAPON)

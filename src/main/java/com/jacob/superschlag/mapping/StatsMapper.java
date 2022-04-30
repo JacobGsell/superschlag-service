@@ -3,11 +3,10 @@ package com.jacob.superschlag.mapping;
 import com.jacob.superschlag.entity.Stats;
 import com.jacob.superschlag.transfer.StatsDto;
 
-import java.util.UUID;
-
 public class StatsMapper {
     public static StatsDto toDto(Stats stats) {
         return StatsDto.builder()
+                .id(stats.getId())
                 .attack(stats.getAttack())
                 .defense(stats.getDefense())
                 .evasion(stats.getEvasion())
@@ -18,7 +17,7 @@ public class StatsMapper {
 
     public static Stats toStats(StatsDto statsDto) {
         return Stats.builder()
-                .id(UUID.randomUUID().toString())
+                .id(statsDto.getId())
                 .attack(statsDto.getAttack())
                 .defense(statsDto.getDefense())
                 .evasion(statsDto.getEvasion())

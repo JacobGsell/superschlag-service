@@ -21,7 +21,7 @@ public class JobService {
         createInitialJobsForTesting();
     }
 
-    public Job findJobById(long id) {
+    public Job findJobById(String id) {
         Optional<Job> jobOptional = jobRepository.findById(id);
 
         if (jobOptional.isEmpty()) {

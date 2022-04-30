@@ -4,7 +4,6 @@ import com.jacob.superschlag.entity.Job;
 import com.jacob.superschlag.transfer.JobDto;
 
 import java.util.List;
-import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class JobMapper {
@@ -12,6 +11,7 @@ public class JobMapper {
 
     public static JobDto toDto(Job job) {
         return JobDto.builder()
+                .id(job.getId())
                 .name(job.getName())
                 .statsDto(StatsMapper.toDto(job.getStats()))
                 .build();
@@ -19,7 +19,7 @@ public class JobMapper {
 
     public static Job toJob(JobDto jobDto) {
         return Job.builder()
-                .id(UUID.randomUUID().toString())
+                .id(jobDto.getId())
                 .name(jobDto.getName())
                 .stats(StatsMapper.toStats(jobDto.getStatsDto()))
                 .build();

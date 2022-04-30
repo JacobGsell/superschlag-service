@@ -14,8 +14,7 @@ public class OwnedItem {
     @Id
     private String id;
 
-    @OneToOne(cascade = CascadeType.PERSIST, fetch = FetchType.LAZY)
-    private Item item;
+    private String itemId;
 
     private boolean isEquipped;
 }
