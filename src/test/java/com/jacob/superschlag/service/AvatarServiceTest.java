@@ -1,12 +1,10 @@
 package com.jacob.superschlag.service;
 
+import com.jacob.superschlag.access.AvatarDao;
+import com.jacob.superschlag.access.OwnedItemDao;
 import com.jacob.superschlag.entity.Avatar;
-import com.jacob.superschlag.entity.ItemType;
 import com.jacob.superschlag.exception.InvalidOwnedItemListException;
 import com.jacob.superschlag.repository.AvatarRepository;
-import com.jacob.superschlag.transfer.AvatarDto;
-import com.jacob.superschlag.transfer.ItemDto;
-import com.jacob.superschlag.transfer.OwnedItemDto;
 import org.junit.Test;
 import org.junit.jupiter.api.BeforeEach;
 import org.junit.runner.RunWith;
@@ -66,63 +64,5 @@ public class AvatarServiceTest {
 
         // Act and Assert
         assertThrows(EntityNotFoundException.class, () -> sut.findAvatarById(avatarId));
-    }
-
-    @Test
-    public void handleNewAvatar_should_throw_InvalidOwnedItemListException_on_indistinct_weaponTypes() {
-        // Arrange
-        ItemDto itemDto1 = ItemDto.builder()
-                .itemType(ItemType.WEAPON)
-                .build();
-
-        ItemDto itemDto2 = ItemDto.builder()
-                .itemType(ItemType.ARMOR)
-                .build();
-
-        ItemDto itemDto3 = ItemDto.builder()
-                .itemType(ItemType.WEAPON)
-                .build();
-
-        OwnedItemDto ownedItemDto1 = OwnedItemDto.builder()
-                .itemDto(itemDto1)
-                .isEquipped(true)
-                .build();
-
-        OwnedItemDto ownedItemDto2 = OwnedItemDto.builder()
-                .itemDto(itemDto2)
-                .isEquipped(true)
-                .build();
-
-        OwnedItemDto ownedItemDto3 = OwnedItemDto.builder()
-                .itemDto(itemDto3)
-                .isEquipped(true)
-                .build();
-
-        List<OwnedItemDto> ownedItemDtoList = List.of(ownedItemDto1, ownedItemDto2, ownedItemDto3);
-
-        AvatarDto avatarDto = AvatarDto.builder()
-                .ownedItemDtoList(ownedItemDtoList)
-                .build();
-
-        // Act and Assert
-        assertThrows(InvalidOwnedItemListException.class, () -> sut.handleNewAvatar(avatarDto));
-    }
-
-    @Test
-    public void handleNewAvatar_should_throw_InvalidOwnedItemListException_on_too_long_OwnedItemList_length() {
-        // Arrange
-        AvatarDto avatarDto = AvatarDto.builder()
-                .ownedItemDtoList(
-                        List.of(
-                                new OwnedItemDto(),
-                                new OwnedItemDto(),
-                                new OwnedItemDto(),
-                                new OwnedItemDto()
-                        )
-                )
-                .build();
-
-        // Act and ASsert
-        assertThrows(InvalidOwnedItemListException.class, () -> sut.handleNewAvatar(avatarDto));
     }
 }

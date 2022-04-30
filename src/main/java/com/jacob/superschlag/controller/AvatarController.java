@@ -1,5 +1,6 @@
 package com.jacob.superschlag.controller;
 
+import com.jacob.superschlag.access.AvatarDao;
 import com.jacob.superschlag.entity.Avatar;
 import com.jacob.superschlag.entity.Job;
 import com.jacob.superschlag.mapping.AvatarMapper;
@@ -30,14 +31,20 @@ public class AvatarController {
     public @ResponseBody
     AvatarDto getAvatarById(@PathVariable String avatarId) {
         Avatar avatar = avatarService.findAvatarById(avatarId);
+        Job job = jobService.findJobById(avatar.getJobId());
+
+        // ToDo: in service auslagern
         AvatarDto avatarDto = AvatarMapper.toDto(avatar);
+        avatarDto.setJobDto(JobMapper.toDto(job));
+
+        // ToDo: gleichen schmarn für ownedItems machen
 
         return avatarDto;
     }
 
     @PostMapping
-    public void postAvatar(@RequestBody AvatarDto avatarDto, HttpServletResponse response) throws Exception {
-        avatarService.handleNewAvatar(avatarDto);
+    public void postAvatar(@RequestBody AvatarDao avatarDao, HttpServletResponse response) throws Exception {
+        avatarService.handleNewAvatar(avatarDao);
 
         response.setStatus(HttpServletResponse.SC_CREATED);
     }

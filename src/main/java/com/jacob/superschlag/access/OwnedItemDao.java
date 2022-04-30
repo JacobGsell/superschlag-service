@@ -5,16 +5,12 @@ import lombok.Builder;
 import lombok.Data;
 import lombok.NoArgsConstructor;
 
-import java.util.List;
-
 @Data
 @Builder
 @AllArgsConstructor
 @NoArgsConstructor
-public class AvatarDao {
-    private String name;
+public class OwnedItemDao {
+    private boolean isEquipped;
 
-    private String jobId;
-
-    private List<OwnedItemDao> ownedItemDaoList;
+    private String itemId;
 }

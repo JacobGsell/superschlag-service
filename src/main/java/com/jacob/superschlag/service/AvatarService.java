@@ -1,11 +1,12 @@
 package com.jacob.superschlag.service;
 
+import com.jacob.superschlag.access.AvatarDao;
+import com.jacob.superschlag.access.OwnedItemDao;
 import com.jacob.superschlag.entity.Avatar;
 import com.jacob.superschlag.entity.ItemType;
 import com.jacob.superschlag.exception.InvalidOwnedItemListException;
 import com.jacob.superschlag.mapping.AvatarMapper;
 import com.jacob.superschlag.repository.AvatarRepository;
-import com.jacob.superschlag.transfer.AvatarDto;
 import com.jacob.superschlag.transfer.OwnedItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -36,21 +37,13 @@ public class AvatarService {
         return avatarOptional.get();
     }
 
-    public void handleNewAvatar(AvatarDto avatarDto) throws Exception {
-        List<OwnedItemDto> equippedItems = avatarDto.getOwnedItemDtoList()
+    public void handleNewAvatar(AvatarDao avatarDao) throws Exception {
+        List<OwnedItemDao> equippedItems = avatarDao.getOwnedItemDaoList()
                 .stream()
-                .filter(OwnedItemDto::isEquipped)
+                .filter(OwnedItemDao::isEquipped)
                 .collect(Collectors.toList());
 
-        if (!hasDistinctItemTypes(equippedItems)) {
-            throw new InvalidOwnedItemListException("Only one equipped item per item type allowed!");
-        }
-
-        if (equippedItems.size() < 3) {
-            throw new InvalidOwnedItemListException("More than 3 items are equipped!");
-        }
-
-        Avatar avatar = AvatarMapper.toAvatar(avatarDto);
+        Avatar avatar = AvatarMapper.toAvatar(avatarDao);
 
         avatarRepository.save(avatar);
     }
