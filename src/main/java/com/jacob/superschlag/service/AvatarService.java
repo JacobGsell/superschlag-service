@@ -4,9 +4,9 @@ import com.jacob.superschlag.entity.Avatar;
 import com.jacob.superschlag.entity.ItemType;
 import com.jacob.superschlag.exception.InvalidOwnedItemListException;
 import com.jacob.superschlag.mapping.AvatarMapper;
+import com.jacob.superschlag.repository.AvatarRepository;
 import com.jacob.superschlag.transfer.AvatarDto;
 import com.jacob.superschlag.transfer.OwnedItemDto;
-import com.jacob.superschlag.repository.AvatarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,7 +16,6 @@ import java.util.List;
 import java.util.Optional;
 import java.util.Set;
 import java.util.stream.Collectors;
-import java.util.stream.Stream;
 
 @Service
 public class AvatarService {
@@ -51,7 +50,7 @@ public class AvatarService {
             throw new InvalidOwnedItemListException("More than 3 items are equipped!");
         }
 
-            Avatar avatar = AvatarMapper.toAvatar(avatarDto);
+        Avatar avatar = AvatarMapper.toAvatar(avatarDto);
 
         avatarRepository.save(avatar);
     }
