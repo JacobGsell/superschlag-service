@@ -26,13 +26,11 @@ import java.util.stream.Collectors;
 @Service
 public class AvatarService {
     private final AvatarRepository avatarRepository;
-    private final JobService jobService;
 
     @Autowired
     public AvatarService(AvatarRepository avatarRepository,
                          JobService jobService) {
         this.avatarRepository = avatarRepository;
-        this.jobService = jobService;
     }
 
     public Avatar findAvatarById(String id) {
