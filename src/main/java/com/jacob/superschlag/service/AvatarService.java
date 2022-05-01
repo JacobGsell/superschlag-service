@@ -3,11 +3,16 @@ package com.jacob.superschlag.service;
 import com.jacob.superschlag.access.AvatarDao;
 import com.jacob.superschlag.access.OwnedItemDao;
 import com.jacob.superschlag.entity.Avatar;
+import com.jacob.superschlag.entity.Item;
 import com.jacob.superschlag.entity.ItemType;
+import com.jacob.superschlag.entity.Job;
 import com.jacob.superschlag.exception.InvalidOwnedItemListException;
 import com.jacob.superschlag.mapping.AvatarMapper;
+import com.jacob.superschlag.mapping.JobMapper;
 import com.jacob.superschlag.repository.AvatarRepository;
+import com.jacob.superschlag.transfer.AvatarDto;
 import com.jacob.superschlag.transfer.OwnedItemDto;
+import lombok.RequiredArgsConstructor;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,10 +26,13 @@ import java.util.stream.Collectors;
 @Service
 public class AvatarService {
     private final AvatarRepository avatarRepository;
+    private final JobService jobService;
 
     @Autowired
-    public AvatarService(AvatarRepository avatarRepository) {
+    public AvatarService(AvatarRepository avatarRepository,
+                         JobService jobService) {
         this.avatarRepository = avatarRepository;
+        this.jobService = jobService;
     }
 
     public Avatar findAvatarById(String id) {
@@ -64,5 +72,11 @@ public class AvatarService {
         }
 
         return true;
+    }
+
+    public AvatarDto getAvatarDtoById(String avatarId) {
+        Avatar avatar = findAvatarById(avatarId);
+        return AvatarMapper.toDto(avatar);
+
     }
 }

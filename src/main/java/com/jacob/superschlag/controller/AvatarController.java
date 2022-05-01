@@ -19,26 +19,16 @@ import javax.servlet.http.HttpServletResponse;
 public class AvatarController {
 
     private final AvatarService avatarService;
-    private final JobService jobService;
 
     @Autowired
     public AvatarController(AvatarService avatarService, JobService jobService) {
         this.avatarService = avatarService;
-        this.jobService = jobService;
     }
 
     @GetMapping(value = "/{avatarId}")
     public @ResponseBody
     AvatarDto getAvatarById(@PathVariable String avatarId) {
-        Avatar avatar = avatarService.findAvatarById(avatarId);
-        Job job = jobService.findJobById(avatar.getJobId());
-
-        // ToDo: in service auslagern
-        AvatarDto avatarDto = AvatarMapper.toDto(avatar);
-        avatarDto.setJobDto(JobMapper.toDto(job));
-
-        // ToDo: gleichen schmarn für ownedItems machen
-
+        AvatarDto avatarDto = avatarService.getAvatarDtoById(avatarId);
         return avatarDto;
     }
 

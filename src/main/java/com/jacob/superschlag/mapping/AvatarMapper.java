@@ -14,6 +14,16 @@ import java.util.UUID;
 import java.util.stream.Collectors;
 
 public class AvatarMapper {
+    private static JobService staticJobService;
+
+    @Autowired
+    private JobService jobService;
+
+    @Autowired
+    private void setJobService(JobService jobService) {
+        AvatarMapper.staticJobService = jobService;
+    }
+
     public static Avatar toAvatar(AvatarDao avatarDao) throws Exception {
         return Avatar.builder()
                 .id(UUID.randomUUID().toString())
@@ -33,12 +43,12 @@ public class AvatarMapper {
     }
 
     public static AvatarDto toDto(Avatar avatar) {
-//        Job job = jobService.findJobById(avatar.getJobId());
+        Job job = staticJobService.findJobById(avatar.getJobId());
 
         return AvatarDto.builder()
                 .id(avatar.getId())
-//                .jobDto(JobMapper.toDto(job))
                 .name(avatar.getName())
+                .jobDto(JobMapper.toDto(job))
                 .ownedItemDtoList(getOwnedItemDtoList(avatar))
                 .build();
     }

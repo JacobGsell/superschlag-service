@@ -6,20 +6,25 @@ import com.jacob.superschlag.entity.OwnedItem;
 import com.jacob.superschlag.service.ItemService;
 import com.jacob.superschlag.transfer.OwnedItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.UUID;
 
+@Component
 public class OwnedItemMapper {
 
-    private static ItemService itemService;
+    private static ItemService staticItemService;
 
     @Autowired
-    public OwnedItemMapper(ItemService itemService) {
-        OwnedItemMapper.itemService = itemService;
+    private ItemService itemService;
+
+    @Autowired
+    private void setItemService(ItemService itemService) {
+        OwnedItemMapper.staticItemService = itemService;
     }
 
     public static OwnedItemDto toDto(OwnedItem ownedItem) {
-        Item item = itemService.getItemById(ownedItem.getItemId());
+        Item item = staticItemService.getItemById(ownedItem.getItemId());
 
         return OwnedItemDto.builder()
                 .id(ownedItem.getId())

@@ -6,6 +6,7 @@ import com.jacob.superschlag.repository.JobRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import javax.annotation.PostConstruct;
 import javax.persistence.EntityNotFoundException;
 import java.util.List;
 import java.util.Optional;
@@ -18,6 +19,10 @@ public class JobService {
     @Autowired
     public JobService(JobRepository jobRepository) {
         this.jobRepository = jobRepository;
+    }
+
+    @PostConstruct
+    private void init() {
         createInitialJobsForTesting();
     }
 
@@ -42,21 +47,27 @@ public class JobService {
     }
 
     private void createInitialJobsForTesting() {
-        Job job1 = createJob("Ritter",
+        Job job1 = createJob(
+                "1",
+                "Ritter",
                 20,
                 50,
                 2,
                 30,
                 130);
 
-        Job job2 = createJob("Dieb",
+        Job job2 = createJob(
+                "2",
+                "Dieb",
                 25,
                 30,
                 30,
                 50,
                 70);
 
-        Job job3 = createJob("Milchmann",
+        Job job3 = createJob(
+                "3",
+                "Milchmann",
                 10,
                 10,
                 10,
@@ -67,9 +78,9 @@ public class JobService {
         jobRepository.saveAll(List.of(job1, job2, job3));
     }
 
-    private Job createJob(String name, int attack, int defense, int evasion, int luck, int health) {
+    private Job createJob(String id, String name, int attack, int defense, int evasion, int luck, int health) {
         return Job.builder()
-                .id(UUID.randomUUID().toString())
+                .id(id)
                 .name(name)
                 .stats(
                         Stats.builder()
