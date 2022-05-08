@@ -8,11 +8,13 @@ import com.jacob.superschlag.service.JobService;
 import com.jacob.superschlag.transfer.AvatarDto;
 import com.jacob.superschlag.transfer.OwnedItemDto;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Component;
 
 import java.util.List;
 import java.util.UUID;
 import java.util.stream.Collectors;
 
+@Component
 public class AvatarMapper {
     private static JobService staticJobService;
 
@@ -24,7 +26,7 @@ public class AvatarMapper {
         AvatarMapper.staticJobService = jobService;
     }
 
-    public static Avatar toAvatar(AvatarDao avatarDao) throws Exception {
+    public static Avatar toAvatar(AvatarDao avatarDao) {
         return Avatar.builder()
                 .id(UUID.randomUUID().toString())
                 .name(avatarDao.getName())
@@ -33,7 +35,7 @@ public class AvatarMapper {
                 .build();
     }
 
-    public static Avatar toAvatar(AvatarDto avatarDto) throws Exception {
+    public static Avatar toAvatar(AvatarDto avatarDto) {
         return Avatar.builder()
                 .id(avatarDto.getId())
                 .name(avatarDto.getName())
@@ -61,14 +63,14 @@ public class AvatarMapper {
                 .collect(Collectors.toList());
     }
 
-    static List<OwnedItem> getOwnedItemList(AvatarDto avatarDto) throws Exception {
+    static List<OwnedItem> getOwnedItemList(AvatarDto avatarDto) {
         return avatarDto.getOwnedItemDtoList()
                 .stream()
                 .map(OwnedItemMapper::toOwnedItem)
                 .collect(Collectors.toList());
     }
 
-    static List<OwnedItem> getOwnedItemList(AvatarDao avatarDao) throws Exception {
+    static List<OwnedItem> getOwnedItemList(AvatarDao avatarDao) {
         return avatarDao.getOwnedItemDaoList()
                 .stream()
                 .map(OwnedItemMapper::toOwnedItem)
